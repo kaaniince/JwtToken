@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JwtToken.JWT;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +20,9 @@ namespace JwtToken
 
         private void btnCreateToken_Click(object sender, EventArgs e)
         {
-
+            TokenGenerator tokenGenerator = new TokenGenerator();
+            string token = tokenGenerator.GenerateJWTToken();
+            richTextBox1.Text = token;
         }
     }
 }
