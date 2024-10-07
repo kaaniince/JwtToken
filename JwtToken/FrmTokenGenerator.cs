@@ -23,7 +23,9 @@ namespace JwtToken
             TokenGenerator tokenGenerator = new TokenGenerator();
             string username = txtUsername.Text;
             string mail = txtMail.Text;
-            string token = tokenGenerator.GenerateJWTToken(username,mail);
+            string name = txtName.Text;
+            string surname = txtSurname.Text;
+            string token = tokenGenerator.GenerateJWTToken(username,mail, name,surname);
             richTextBox1.Text = token;
         }
     }

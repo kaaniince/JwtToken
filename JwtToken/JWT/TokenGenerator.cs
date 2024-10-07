@@ -11,7 +11,7 @@ namespace JwtToken.JWT
 {
     public class TokenGenerator
     {
-        public string GenerateJWTToken(string username, string mail)
+        public string GenerateJWTToken(string username, string mail, string name, string surname)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("A much longer secret phase that meets the required length"));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -19,6 +19,8 @@ namespace JwtToken.JWT
             {
         new Claim(JwtRegisteredClaimNames.Sub, username),
         new Claim(JwtRegisteredClaimNames.Email, mail),
+        new Claim(JwtRegisteredClaimNames.GivenName, name),
+        new Claim(JwtRegisteredClaimNames.FamilyName, surname),
         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
     };
 
