@@ -11,14 +11,14 @@ namespace JwtToken.JWT
 {
     public class TokenGenerator
     {
-        public string GenerateJWTToken()
+        public string GenerateJWTToken(string username, string mail)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("A much longer secret phase that meets the required length"));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claim = new[]
             {
-        new Claim(JwtRegisteredClaimNames.Sub, "test1"),
-        new Claim(JwtRegisteredClaimNames.Email, "kaaniince@outlook.com"),
+        new Claim(JwtRegisteredClaimNames.Sub, username),
+        new Claim(JwtRegisteredClaimNames.Email, mail),
         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
     };
 
