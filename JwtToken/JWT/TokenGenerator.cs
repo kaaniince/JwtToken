@@ -34,5 +34,31 @@ namespace JwtToken.JWT
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+
+        public string GenerateJWTToken2(string username)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("A much longer secret phase that meets the required length"));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var claim = new[]
+            {
+        new Claim(JwtRegisteredClaimNames.Sub, username),
+        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+    };
+
+            var token = new JwtSecurityToken(
+                issuer: "localhost",
+                audience: "localhost",
+                claims: claim,
+                expires: DateTime.Now.AddMinutes(5),
+                signingCredentials: credentials
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+
+
+
     }
 }
